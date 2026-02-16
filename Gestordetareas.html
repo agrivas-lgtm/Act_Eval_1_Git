@@ -194,8 +194,44 @@
     
     // Rama "editar"
     function editSelected() {
-      
-      
+      if (selectedId === null ) {
+        selectedId ("No se enconto la tarea seleccionada para editar ");
+        selectedId = null;
+        render();
+        return;
+      }
+      const current = tasks.find(t => t.id === selectedId);
+      if (!current) {
+        setStatus("No se encontró la tarea seleccionada para editarla","danger");
+        selectedId = null;
+        render();
+        return;
+
+      }
+
+
+      const inputText = readInputTrimmed();
+      let newText = inputText;
+
+      if (!newText) {
+        newText = prompt ("Nuevo texto para la tarea", current.text);
+        if (newText --- null) {
+          setStatus ("Edicion cancelada.", "mute");
+          return;
+          
+        }
+        if(!newText){
+
+          setStatus("El  texto d ela tarea no puede quedar vacio", "danger");
+          return;
+        }
+        current.text = newText;
+        clearInput();
+        setStatus(`tarea editada (ID ${selectedId}).`,"danger");
+        render();
+
+
+      }
     }
 
     // =========================
